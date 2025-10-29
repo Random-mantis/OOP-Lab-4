@@ -17,13 +17,25 @@ public:
     ~Triangle() = default;
 
     Triangle& operator=(const Triangle& other) {
-        Figure<T>::operator=(other);
+        if (this == &other) return *this;
+        for (std::size_t i = 0; i < 3; ++i)
+            this->coord[i] = other.coord[i];
         return *this;
     }
 
+    bool operator==(const Triangle& other) const {
+        for (std::size_t i = 0; i < 3; ++i)
+            if (this->coord[i] != other.coord[i]) return false;
+        return true;
+    }
+
+    bool operator!=(const Triangle& other) const {
+        return !(*this == other);
+    }
+
     operator double() const override {
-        auto& coord = this->getcoord();
-        double len = std::hypot(coord[1].getx() - coord[0].getx(), coord[1].gety() - coord[0].gety());
+        auto& c = this->getcoord();
+        double len = std::hypot(c[1].getx() - c[0].getx(), c[1].gety() - c[0].gety());
         return (std::sqrt(3.0) / 4.0) * len * len;
     }
 };
@@ -37,13 +49,25 @@ public:
     ~Fourangle() = default;
 
     Fourangle& operator=(const Fourangle& other) {
-        Figure<T>::operator=(other);
+        if (this == &other) return *this;
+        for (std::size_t i = 0; i < 4; ++i)
+            this->coord[i] = other.coord[i];
         return *this;
     }
 
+    bool operator==(const Fourangle& other) const {
+        for (std::size_t i = 0; i < 4; ++i)
+            if (this->coord[i] != other.coord[i]) return false;
+        return true;
+    }
+
+    bool operator!=(const Fourangle& other) const {
+        return !(*this == other);
+    }
+
     operator double() const override {
-        auto& coord = this->getcoord();
-        double len = std::hypot(coord[1].getx() - coord[0].getx(), coord[1].gety() - coord[0].gety());
+        auto& c = this->getcoord();
+        double len = std::hypot(c[1].getx() - c[0].getx(), c[1].gety() - c[0].gety());
         return len * len;
     }
 };
@@ -57,13 +81,25 @@ public:
     ~Eightangle() = default;
 
     Eightangle& operator=(const Eightangle& other) {
-        Figure<T>::operator=(other);
+        if (this == &other) return *this;
+        for (std::size_t i = 0; i < 8; ++i)
+            this->coord[i] = other.coord[i];
         return *this;
     }
 
+    bool operator==(const Eightangle& other) const {
+        for (std::size_t i = 0; i < 8; ++i)
+            if (this->coord[i] != other.coord[i]) return false;
+        return true;
+    }
+
+    bool operator!=(const Eightangle& other) const {
+        return !(*this == other);
+    }
+
     operator double() const override {
-        auto& coord = this->getcoord();
-        double len = std::hypot(coord[1].getx() - coord[0].getx(), coord[1].gety() - coord[0].gety());
+        auto& c = this->getcoord();
+        double len = std::hypot(c[1].getx() - c[0].getx(), c[1].gety() - c[0].gety());
         return 2.0 * len * len * (std::sqrt(2.0) + 1.0);
     }
 };

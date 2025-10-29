@@ -16,8 +16,9 @@ private:
     size_t n{0};
 public:
     Array() = default;
-    Array(std::unique_ptr<T[]>&& f, size_t size): figures(std::shared_ptr<T[]>(std::move(f))), n(size) {}
-
+    
+    Array(std::unique_ptr<T[]>&& f, size_t size) : figures(std::shared_ptr<T[]>(std::move(f))), n(size) {}
+    
     void remove(size_t index) {
         if (index >= n) return;
         auto p = std::shared_ptr<T[]>(new T[n - 1], std::default_delete<T[]>());
@@ -31,16 +32,19 @@ public:
     }
 
     void print_centre() const {
-        for (size_t i = 0; i < n; ++i) std::cout << figures[i].centre() << "\n";
+        for (size_t i = 0; i < n; ++i)
+            std::cout << figures[i].centre() << "\n";
     }
 
     void print_area() const {
-        for (size_t i = 0; i < n; ++i) std::cout << static_cast<double>(figures[i]) << "\n";
+        for (size_t i = 0; i < n; ++i)
+            std::cout << static_cast<double>(figures[i]) << "\n";
     }
 
     double total_area() const {
         double sum = 0.0;
-        for (size_t i = 0; i < n; ++i) sum += static_cast<double>(figures[i]);
+        for (size_t i = 0; i < n; ++i)
+            sum += static_cast<double>(figures[i]);
         return sum;
     }
 };
